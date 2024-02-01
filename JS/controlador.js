@@ -21,7 +21,7 @@ function recuperar(){
 }
 function obrirNovaFactura(){
     $("#btnNovaFactura").on("click",function(){
-        $("#novaFactura").openModal();
+        document.getElementById("novaFactura").showModal();
     });
 }
 
