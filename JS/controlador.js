@@ -2,6 +2,7 @@
 
 function init() {
     recuperar();
+    obrirNovaFactura();
 }
 
 function recuperar() {
@@ -33,5 +34,10 @@ function recuperar() {
         input.click();
     });
 }
+function obrirNovaFactura(){
+    $("#btnNovaFactura").on("click",function(){
+        document.getElementById("novaFactura").showModal();
+    });
+}
 
-$(init);
+$(document).ready(init);

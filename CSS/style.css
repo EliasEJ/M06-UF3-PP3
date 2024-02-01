@@ -5,3 +5,37 @@
 .botons{
     text-align: center;
 }
+
+.centrat {
+	position: absolute;
+	margin: 0;
+	padding: 2rem;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 28rem;
+	background-color: white;
+	border-radius: 1.5rem;
+	box-shadow: 8px 8px 24px 0 rgba(0, 0, 0, 0.5);
+}
+.dialogo {
+	position: fixed;
+	left: 0;
+	top:0;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+	background-color: rgba(0,0,0,0.1);
+	backdrop-filter: blur(1px);
+}
+
+.tancar{
+	position:absolute;
+	border-radius:2rem;
+	background-color:#e8e8e8;
+	margin:0;
+	padding: 0.5rem;
+	top:1rem;
+	right:1rem;
+	opacity:0.6;
+}
