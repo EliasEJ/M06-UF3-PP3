@@ -16,7 +16,7 @@
             "total": 111.90,
             "pagada": true,
             "articles":{
-                "article": [
+                "articles": [
                     {
                         "codi": "1",
                         "descripcio": "Article 1",
