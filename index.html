@@ -21,43 +21,46 @@
             <img id="tancar" class="tancar" src="CSS/close.svg">
             <!--Añadir aqui todos los elementos de la nueva factura-->
             <div>
+                <h1>Nova facutra</h1>
+            </div>
+            <div>
                 <label for="numFactura">Núm. factura</label>
-                <input type="text" id="numFactura">
+                <input type="text" id="numFactura" disabled>
             </div>
             <div>
                 <label for="data">Data factura</label>
-                <input type="date" id="data">
+                <input type="date" id="data" required>
             </div>
             <div>
                 <label for="pagada">Pagada</label>
-                <input type="checkbox" id="pagada">
+                <input type="checkbox" id="pagada" required>
             </div>
             <div>
                 <label for="nif">NIF</label>
-                <input type="text" id="nif">
+                <input type="text" id="nif" pattern="[0-9]{8}[A-Za-z]{1}" required>
             </div>
             <div>
                 <label for="nom">Nom</label>
-                <input type="text" id="nom">
+                <input type="text" id="nom" required minlength="3" pattern="[a-zA-Z]{3}$">
             </div>
             <div>
                 <label for="telefon">Telèfon</label>
-                <input type="text" id="telefon">
+                <input type="text" id="telefon" required minlength="9" maxlength="9" pattern="[0-9]{9}">
             </div>
             <div>
                 <label for="email">E-mail</label>
-                <input type="text" id="email">
+                <input type="text" id="email" required>
             </div><br>
             <div>
                 <label for="dte">% Dte</label>
-                <input type="text" id="dte">
+                <input type="text" id="dte" required minlength="2" maxlength="2" pattern="[0-9]{2}">
             </div>
             <div>
                 <label for="iva">% IVA</label>
-                <input type="text" id="iva">
+                <input type="text" id="iva" required minlength="2" maxlength="2" pattern="[0-9]{2}">
             </div>
             <div>
-                <button id="guardarFactura" class="btn btn-dark center">Guardar</button>
+                <button type="submit" id="guardarFactura" class="btn btn-dark center">Guardar</button>
             </div>
         </div>
     </dialog>

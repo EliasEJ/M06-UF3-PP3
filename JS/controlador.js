@@ -1,5 +1,6 @@
 "use strict";
 let dialog = document.getElementById("novaFactura");
+let numFactura = 0;
 function init() {
     recuperar();
     obrirNovaFactura();
@@ -38,6 +39,7 @@ function recuperar() {
 function obrirNovaFactura(){
     $("#btnNovaFactura").on("click",function(){
         dialog.showModal();
+        verificacions();
     });
 }
 
@@ -52,6 +54,24 @@ function tancarFactura(){
     $("#tancar").on("click",function(){
         dialog.close();
     });
+}
+
+function verificacions(){
+    verfNumFactura();
+}
+
+function verfNumFactura(){
+    numFactura += 1;
+    $("#numFactura").val(numFactura);
+}
+
+function verfNom(){
+    let nom = $("#nom").val();
+    if(nom.length < 3 && nom == isNaN()){
+        $("#nom").addClass("is-invalid");
+    }else{
+        $("#nom").removeClass("is-invalid");
+    }
 }
 
 $(document).ready(init);
