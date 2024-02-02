@@ -1,6 +1,5 @@
 "use strict";
 let dialog = document.getElementById("novaFactura");
-let numFactura = 0;
 function init() {
     recuperar();
     obrirNovaFactura();
@@ -25,7 +24,7 @@ function recuperar() {
                 for (let key in obj) {
                     // Ignorar la propiedad 'articles'
                     if (key !== 'articles') {
-                        output += `<tr><td>${key}</td><td>${obj[key]}</td></tr>`;
+                        output += `<tr><td id="idTaula">${key}</td><td>${obj[key]}</td></tr>`;
                     }
                 }
                 // Agregar los datos al tbody
@@ -56,21 +55,25 @@ function tancarFactura(){
     });
 }
 
-function verificacions(){
-    verfNumFactura();
+$("#guardarFactura").on("click",function(){
+
+});
+
+function mostrarNumFactura(){
+    $("#numFactura").val(_numFactura);
 }
 
-function verfNumFactura(){
-    numFactura += 1;
-    $("#numFactura").val(numFactura);
+function sumarNumFactura(){
+    _numFactura += 1;
 }
 
-function verfNom(){
-    let nom = $("#nom").val();
-    if(nom.length < 3 && nom == isNaN()){
-        $("#nom").addClass("is-invalid");
-    }else{
-        $("#nom").removeClass("is-invalid");
+function verificarNumFactura(){
+    let num = $("#numFactura").val();
+    if(num > $("#idTaula").val()){
+        _numFactura = num;
+        _numFactura += 1;
+    }else {
+        $("#numFactura").val(_numFactura);
     }
 }
 
