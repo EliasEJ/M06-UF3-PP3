@@ -24,7 +24,6 @@
 	top:0;
 	width: 100%;
 	height: 100%;
-	z-index: 10;
 	background-color: rgba(0,0,0,0.1);
 	backdrop-filter: blur(1px);
 }
@@ -38,4 +37,9 @@
 	top:1rem;
 	right:1rem;
 	opacity:0.6;
+	height: 30px;
+	width: 30px;
+}
+.tancar:hover{
+	opacity:1;
 }

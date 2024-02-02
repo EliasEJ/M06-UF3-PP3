@@ -17,9 +17,48 @@
     <button id="guardar" class="botons ml-1 btn btn-dark">Guardar</button>
     <button id="btnNovaFactura" class="botons ml-1 btn btn-dark">Nova Factura</button>
     <dialog id="novaFactura" class="dialogo">
-        <div class="centrat">
+        <div class="centrat centrarDreta">
             <img id="tancar2" class="tancar" src="CSS/close.svg">
             <!--Añadir aqui todos los elementos de la nueva factura-->
+            <div>
+                <label for="numFactura">Núm. factura</label>
+                <input type="text" id="numFactura">
+            </div>
+            <div>
+                <label for="data">Data factura</label>
+                <input type="date" id="data">
+            </div>
+            <div>
+                <label for="pagada">Pagada</label>
+                <input type="checkbox" id="pagada">
+            </div>
+            <div>
+                <label for="nif">NIF</label>
+                <input type="text" id="nif">
+            </div>
+            <div>
+                <label for="nom">Nom</label>
+                <input type="text" id="nom">
+            </div>
+            <div>
+                <label for="telefon">Telèfon</label>
+                <input type="text" id="telefon">
+            </div>
+            <div>
+                <label for="email">E-mail</label>
+                <input type="text" id="email">
+            </div><br>
+            <div>
+                <label for="dte">% Dte</label>
+                <input type="text" id="dte">
+            </div>
+            <div>
+                <label for="iva">% IVA</label>
+                <input type="text" id="iva">
+            </div>
+            <div>
+                <button id="guardarFactura" class="btn btn-dark center">Guardar</button>
+            </div>
         </div>
     </dialog>
     <br><br>
