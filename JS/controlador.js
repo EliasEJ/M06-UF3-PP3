@@ -1,8 +1,9 @@
 "use strict";
-
+let dialog = document.getElementById("novaFactura");
 function init() {
     recuperar();
     obrirNovaFactura();
+    tancarFactura();
 }
 
 function recuperar() {
@@ -38,6 +39,17 @@ function obrirNovaFactura(){
     $("#btnNovaFactura").on("click",function(){
         document.getElementById("novaFactura").showModal();
     });
+}
+
+function tancarFactura(){
+    dialog.addEventListener("click", ev => {
+        const x = ev.clientX;
+        const y = ev.clientY;
+        const rect = dialog.getBoundingClientRect();
+    
+        if (x < rect.left || x >= rect.right || y < rect.top || y >= rect.bottom) dialog.close();
+    });
+
 }
 
 $(document).ready(init);
