@@ -10,86 +10,184 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>Factures SaPa</title>
 </head>
+
 <body>
-    <div class="container-fluid">
-    <h1 class="titol">Facutres SaPa</h1>
-    <button id="recuperar" class="btn btn-dark" tabindex="0">Recuperar</button>
-    <button id="guardar" class="botons ml-1 btn btn-dark" tabindex="1">Guardar</button>
-    <button id="btnNovaFactura" class="botons ml-1 btn btn-dark" tabindex="2">Nova Factura</button>
-    <dialog id="novaFactura">
-        <div class="centrat centrarDreta">
-            <img id="tancar" class="tancar" src="CSS/close.svg">
-            <!--Añadir aqui todos los elementos de la nueva factura-->
-            <div>
-                <h1>Nova facutra</h1>
+    <div class="container-fluid noprint">
+        <h1 class="titol">Facutres SaPa</h1>
+        <button id="recuperar" class="btn btn-dark" tabindex="0">Recuperar</button>
+        <button id="guardar" class="botons ml-1 btn btn-dark" tabindex="1">Guardar</button>
+        <button id="btnNovaFactura" class="botons ml-1 btn btn-dark" tabindex="2">Nova Factura</button>
+        <dialog id="novaFactura">
+            <div class="centrat centrarDreta">
+                <img id="tancar" class="tancar" src="CSS/close.svg">
+                <!--Añadir aqui todos los elementos de la nueva factura-->
+                <div>
+                    <h1>Nova facutra</h1>
+                </div>
+                <div>
+                    <label for="numFactura">Núm. factura</label>
+                    <input type="text" id="numFactura" disabled>
+                </div>
+                <div>
+                    <label for="data">Data factura</label>
+                    <input type="date" id="data" required>
+                </div>
+                <div>
+                    <label for="pagada">Pagada</label>
+                    <input type="checkbox" id="pagada" required>
+                </div>
+                <div>
+                    <label for="nif">NIF</label>
+                    <input type="text" id="nif" pattern="[0-9]{8}[A-Za-z]{1}" required>
+                </div>
+                <div>
+                    <label for="nom">Nom</label>
+                    <input type="text" id="nom" required minlength="3" pattern="[a-zA-Z]{3}$">
+                </div>
+                <div>
+                    <label for="telefon">Telèfon</label>
+                    <input type="text" id="telefon" required minlength="9" maxlength="9" pattern="[0-9]{9}">
+                </div>
+                <div>
+                    <label for="email">E-mail</label>
+                    <input type="text" id="email" required>
+                </div><br>
+                <div>
+                    <label for="dte">% Dte</label>
+                    <input type="text" id="dte" required minlength="2" maxlength="2" pattern="[0-9]{2}">
+                </div>
+                <div>
+                    <label for="iva">% IVA</label>
+                    <input type="text" id="iva" required minlength="2" maxlength="2" pattern="[0-9]{2}">
+                </div>
+                <div>
+                    <button type="submit" id="guardarFactura" class="btn btn-dark center">Guardar</button>
+                </div>
             </div>
-            <div>
-                <label for="numFactura">Núm. factura</label>
-                <input type="text" id="numFactura" disabled>
+        </dialog>
+
+        <dialog id="editarFactura">
+            <div class="centrat centrarDreta">
+                <img id="tancar" class="tancar" src="CSS/close.svg">
+                <!--Añadir aqui todos los elementos de la nueva factura-->
+                <div>
+                    <h1>Dades de la factura</h1>
+                </div>
+                <div>
+                    <label for="numFactura">Núm. factura</label>
+                    <input type="text" id="idFactura" disabled>
+                </div>
+                <div>
+                    <label for="data">Data factura</label>
+                    <input type="date" id="dataFactura" required>
+                </div>
+                <div>
+                    <label for="pagada">Pagada</label>
+                    <input type="checkbox" id="pagada" required>
+                </div>
+                <div>
+                    <label for="nif">NIF</label>
+                    <input type="text" id="nifFactura" pattern="[0-9]{8}[A-Za-z]{1}" required>
+                </div>
+                <div>
+                    <label for="nom">Nom</label>
+                    <input type="text" id="nomClient" required minlength="3" pattern="[a-zA-Z]{3}$">
+                </div>
+                <div>
+                    <label for="telefon">Telèfon</label>
+                    <input type="text" id="telefonFactura" required minlength="9" maxlength="9" pattern="[0-9]{9}">
+                </div>
+                <div>
+                    <label for="email">E-mail</label>
+                    <input type="text" id="emailFactura" required>
+                </div><br>
+                <div>
+                    <label for="dte">% Dte</label>
+                    <input type="text" id="dteFactura" required minlength="2" maxlength="2" pattern="[0-9]{2}">
+                </div>
+                <div>
+                    <label for="iva">% IVA</label>
+                    <input type="text" id="ivaFactura" required minlength="2" maxlength="2" pattern="[0-9]{2}">
+                </div>
+                <div>
+                    <button type="submit" id="guardarFactura" class="btn btn-dark center">Guardar</button>
+                </div>
             </div>
-            <div>
-                <label for="data">Data factura</label>
-                <input type="date" id="data" required>
+        </dialog>
+
+
+        <br><br>
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Data</th>
+                            <th>NIF</th>
+                            <th>Client</th>
+                            <th>Telèfon</th>
+                            <th>E-mail</th>
+                            <th>Subtotal</th>
+                            <th>DTE</th>
+                            <th>Base I</th>
+                            <th>IVA</th>
+                            <th>Total</th>
+                            <th>P ?</th>
+                            <th>Accions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="taula">
+                    </tbody>
+                </table>
             </div>
-            <div>
-                <label for="pagada">Pagada</label>
-                <input type="checkbox" id="pagada" required>
-            </div>
-            <div>
-                <label for="nif">NIF</label>
-                <input type="text" id="nif" pattern="[0-9]{8}[A-Za-z]{1}" required>
-            </div>
-            <div>
-                <label for="nom">Nom</label>
-                <input type="text" id="nom" required minlength="3" pattern="[a-zA-Z]{3}$">
-            </div>
-            <div>
-                <label for="telefon">Telèfon</label>
-                <input type="text" id="telefon" required minlength="9" maxlength="9" pattern="[0-9]{9}">
-            </div>
-            <div>
-                <label for="email">E-mail</label>
-                <input type="text" id="email" required>
-            </div><br>
-            <div>
-                <label for="dte">% Dte</label>
-                <input type="text" id="dte" required minlength="2" maxlength="2" pattern="[0-9]{2}">
-            </div>
-            <div>
-                <label for="iva">% IVA</label>
-                <input type="text" id="iva" required minlength="2" maxlength="2" pattern="[0-9]{2}">
-            </div>
-            <div>
-                <button type="submit" id="guardarFactura" class="btn btn-dark center">Guardar</button>
-            </div>
-        </div>
-    </dialog>
-    <br><br>
-    <div class="row">
-        <div class="col-12">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Data</th>
-                        <th>NIF</th>
-                        <th>Client</th>
-                        <th>Telèfon</th>
-                        <th>E-mail</th>
-                        <th>Subtotal</th>
-                        <th>DTE</th>
-                        <th>Base I</th>
-                        <th>IVA</th>
-                        <th>Total</th>
-                        <th>P ?</th>
-                        <th>Accions</th>
-                    </tr>
-                </thead>
-                <tbody id="taula">
-                </tbody>
-            </table>
         </div>
     </div>
-</div>
+    
+    <div class="printable">
+        <div class="text-center h2">
+            <p>Factura</p>
+            <br><br>
+        </div>
+        <div class="row">
+            <div class="col-9">
+                <div class="row">
+                    <div class="border col-3">Data factura</div>
+                    <div class="border col-4" id="dataPrint"></div>
+                    <div class="border col-3">Núm. factura</div>
+                    <div class="border col-2" id="numFacPrint"></div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="border col-2">NIF</div>
+            <div class="border col-4" id="nifFacPrint"></div>
+            <div class="border col-2">Nom</div>
+            <div class="border col-4" id="nomFacPrint"></div>
+        </div>
+        <div class="row">
+            <div class="border col-2">Adreça</div>
+            <div class="border col-4" id="adrecaFacPrint"></div>
+            <div class="border col-2">Població</div>
+            <div class="border col-4" id="poblacioFacPrint"></div>
+        </div>
+        <br>
+        <table class="table table-striped"> 
+            <thead>
+                <tr>
+                    <th>Codi</th>
+                    <th>Article</th>
+                    <th>Unitat</th>
+                    <th>Preu</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody id="taulaPrint">
+            </tbody>
+        </table>
+    </div>
+
 </body>
+
 </html>

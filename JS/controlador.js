@@ -1,5 +1,7 @@
 "use strict";
+
 let dialog = document.getElementById("novaFactura");
+let dialogEditar = document.getElementById("editarFactura");
 function init() {
     recuperar();
     obrirNovaFactura();
@@ -24,7 +26,7 @@ function recuperar() {
                     for (let i in factures[f]){
                         let factura = factures[f][i];
                         let fila = `
-                            <tr>
+                            <tr id="fila-${factura.id}">
                                 <td>${factura.id}</td>
                                 <td>${factura.data}</td>
                                 <td>${factura.nif}</td>
@@ -38,7 +40,7 @@ function recuperar() {
                                 <td>${factura.total}</td>
                                 <td>${factura.pagada}</td>
                                 <td>
-                                <img src="IMG/eliminar.png" onclick="eliminarFactura(${factura.id})" alt="Eliminar">
+                                <img src="IMG/eliminar.png" onclick="eliminarFactura('fila-${factura.id}')" alt="Eliminar">
                                 <img src="IMG/imprimir.png" onclick="imprimirFactura(${factura.id})" alt="Imprimir">
                                 <img src="IMG/editar.png" onclick="editarFactura(${factura.id})" alt="Editar">
                                 <img src="IMG/ver.png" onclick="verArticulos(${factura.id})" alt="Ver">
@@ -54,6 +56,44 @@ function recuperar() {
         input.click();
     });
 }
+
+function eliminarFactura(idFila){
+    console.log(idFila);
+    let fila = document.getElementById(idFila);
+    fila.remove();
+
+}
+
+function editarFactura(idFactura){
+    // Buscar la fila de la tabla con el id de la factura
+    let fila = document.getElementById('fila-' + idFactura);
+    // Obtener los datos de la fila
+    let datos = fila.children;
+    // Mostrar el dialogo
+    dialogEditar.showModal();
+    // Rellenar los campos del dialogo
+    $("#idFactura").val(idFactura);
+    $("#dataFactura").val(datos[1].textContent);
+    $("#nifFactura").val(datos[2].textContent);
+    $("#nomClient").val(datos[3].textContent);
+    $("#telefonFactura").val(datos[4].textContent);
+    $("#emailFactura").val(datos[5].textContent);
+    $("#dteFactura").val(datos[7].textContent);
+    $("#ivaFactura").val(datos[8].textContent);
+    $("#pagadaFactura").val(datos[11].textContent);
+}
+
+function imprimirFactura(idFactura){
+    $("#numFacPrint").text(idFactura);
+    $("#dataPrint").text($("#fila-" + idFactura + " td:nth-child(2)").text());
+    $("#nifFacPrint").text($("#fila-" + idFactura + " td:nth-child(3)").text());
+    $("#nomFacPrint").text($("#fila-" + idFactura + " td:nth-child(4)").text());
+    // TODO: Falta la dirección
+    // $("#adrecaFacPrint").text($("#fila-" + idFactura + " td:nth-child(5)").text());
+
+    window.print();
+}
+
 function obrirNovaFactura(){
     $("#btnNovaFactura").on("click",function(){
         dialog.showModal();
@@ -95,5 +135,6 @@ function verificarNumFactura(){
         $("#numFactura").val(_numFactura);
     }
 }
+
 
 $(document).ready(init);

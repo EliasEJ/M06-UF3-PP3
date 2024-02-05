@@ -47,3 +47,18 @@ input:invalid{
 input:valid{
 	border-color: green;
 }
+
+@media print {
+    .noprint {display:none;}
+    * {color:black; background-color:white;}
+}
+
+.printable {
+	display: none;
+}
+
+@media print {
+	.printable {
+		display: block;
+	}
+}
