@@ -1,9 +1,9 @@
 {
     "factures": [
         {
-            "num_factura": "1",
+            "id": "1",
             "data": "2022-01-01",
-            "nif_client": "12345678A",
+            "nif": "12345678A",
             "nom_client": "Juan Pérez",
             "telefon": "123456789",
             "adreca": "C/ Falsa, 123",
@@ -11,35 +11,72 @@
             "email": "juan@example.com",
             "subtotal": 100.00,
             "dte": 10.00,
-            "base_imponible": 90.00,
+            "baseI": 90.00,
             "iva": 21.00,
             "total": 111.90,
             "pagada": true,
-            "articles":{
-                "articles": [
-                    {
-                        "codi": "1",
-                        "descripcio": "Article 1",
-                        "quantitat": 1,
-                        "preu": 100.00,
-                        "subtotal": 100.00
-                    },
-                    {
-                        "codi": "2",
-                        "descripcio": "Article 2",
-                        "quantitat": 1,
-                        "preu": 100.00,
-                        "subtotal": 100.00
-                    },
-                    {
-                        "codi": "3",
-                        "descripcio": "Article 3",
-                        "quantitat": 1,
-                        "preu": 100.00,
-                        "subtotal": 100.00
-                    }
-                ]
-            }
+            "articles": [
+                {
+                    "codi": "1",
+                    "descripcio": "Article 1",
+                    "quantitat": 1,
+                    "preu": 100.00,
+                    "subtotal": 100.00
+                },
+                {
+                    "codi": "2",
+                    "descripcio": "Article 2",
+                    "quantitat": 1,
+                    "preu": 100.00,
+                    "subtotal": 100.00
+                },
+                {
+                    "codi": "3",
+                    "descripcio": "Article 3",
+                    "quantitat": 1,
+                    "preu": 100.00,
+                    "subtotal": 100.00
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "data": "2022-01-02",
+            "nif": "12345678B",
+            "nom_client": "Pepito Pérez",
+            "telefon": "123456789",
+            "adreca": "C/ Falsa, 123",
+            "poblacio": "Barcelona",
+            "email": "juan@example.com",
+            "subtotal": 100.00,
+            "dte": 10.00,
+            "baseI": 90.00,
+            "iva": 21.00,
+            "total": 111.90,
+            "pagada": true,
+            "articles": [
+                {
+                    "codi": "1",
+                    "descripcio": "Article 1",
+                    "quantitat": 1,
+                    "preu": 100.00,
+                    "subtotal": 100.00
+                },
+                {
+                    "codi": "2",
+                    "descripcio": "Article 2",
+                    "quantitat": 1,
+                    "preu": 100.00,
+                    "subtotal": 100.00
+                },
+                {
+                    "codi": "3",
+                    "descripcio": "Article 3",
+                    "quantitat": 1,
+                    "preu": 100.00,
+                    "subtotal": 100.00
+                }
+            ]
         }
     ]
 }

@@ -7,6 +7,7 @@ function init() {
 }
 
 function recuperar() {
+    $("#taula");
     $("#recuperar").on("click", function () {
         let input = document.createElement('input');
         input.type = 'file';
@@ -18,17 +19,30 @@ function recuperar() {
             let reader = new FileReader();
             reader.onload = function(event) {
                 // Parsear el archivo JSON
-                let obj = JSON.parse(event.target.result);
-                let output = '';
-                // Iterar sobre los datos del objeto
-                for (let key in obj) {
-                    // Ignorar la propiedad 'articles'
-                    if (key !== 'articles') {
-                        output += `<tr><td id="idTaula">${key}</td><td>${obj[key]}</td></tr>`;
+                let factures = JSON.parse(event.target.result);
+                for (let f in factures){
+                    for (let i in factures[f]){
+                        let factura = factures[f][i];
+                        let fila = `
+                            <tr>
+                                <td>${factura.id}</td>
+                                <td>${factura.data}</td>
+                                <td>${factura.nif}</td>
+                                <td>${factura.nom_client}</td>
+                                <td>${factura.telefon}</td>
+                                <td>${factura.email}</td>
+                                <td>${factura.subtotal}</td>
+                                <td>${factura.dte}</td>
+                                <td>${factura.baseI}</td>
+                                <td>${factura.iva}</td>
+                                <td>${factura.total}</td>
+                                <td>${factura.pagada}</td>
+                                
+                            </tr>`;
+                        $("#taula").append(fila);
                     }
                 }
-                // Agregar los datos al tbody
-                $('#taula').html(output);
+                
             };
             reader.readAsText(file);
         }
