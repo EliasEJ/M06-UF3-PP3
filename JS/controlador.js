@@ -37,7 +37,12 @@ function recuperar() {
                                 <td>${factura.iva}</td>
                                 <td>${factura.total}</td>
                                 <td>${factura.pagada}</td>
-                                
+                                <td>
+                                <img src="IMG/eliminar.png" onclick="eliminarFactura(${factura.id})" alt="Eliminar">
+                                <img src="IMG/imprimir.png" onclick="imprimirFactura(${factura.id})" alt="Imprimir">
+                                <img src="IMG/editar.png" onclick="editarFactura(${factura.id})" alt="Editar">
+                                <img src="IMG/ver.png" onclick="verArticulos(${factura.id})" alt="Ver">
+                                </td>
                             </tr>`;
                         $("#taula").append(fila);
                     }
