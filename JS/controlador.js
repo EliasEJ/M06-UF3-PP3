@@ -109,6 +109,24 @@ function editarFactura(idFactura){
     $("#dteFactura").val(datos[7].textContent);
     $("#ivaFactura").val(datos[9].textContent);
     $("#pagadaFactura").val(datos[11].textContent);
+
+    // Guardar los datos de la factura
+    $("#guardarFacturaEditada").on("click", function(){
+        //verificar que los campos esten completos
+        if ($("#idFactura").val() != "" && $("#dataFactura").val() != "" && $("#emailFactura").val().match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/) && $("#nifFactura").val().match(/[0-9]{8}[A-Za-z]{1}/) && $("#nomClient").val().match(/[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+/) && $("#telefonFactura").val().match(/[0-9]{9}/) && $("#dteFactura").val().match(/[0-9]{2}/) && $("#ivaFactura").val().match(/[0-9]{2}/)) {
+            // Modificar los datos de la fila
+            datos[1].textContent = $("#dataFactura").val();
+            datos[2].textContent = $("#nifFactura").val();
+            datos[3].textContent = $("#nomClient").val();
+            datos[4].textContent = $("#telefonFactura").val();
+            datos[5].textContent = $("#emailFactura").val();
+            datos[7].textContent = $("#dteFactura").val();
+            datos[9].textContent = $("#ivaFactura").val();
+            datos[11].textContent = $("#pagadaFactura").val() === "Si" ? "Si" : "No";
+            // Cerrar el dialogo
+            dialogEditar.close();
+        }
+    });
     
 }
 
