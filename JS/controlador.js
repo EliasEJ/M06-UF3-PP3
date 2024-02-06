@@ -66,7 +66,7 @@ function recuperar() {
                                 <td>${factura.baseI.toLocaleString("es-ES", style)}</td>
                                 <td>${factura.iva}</td>
                                 <td>${factura.total.toLocaleString("es-ES", style)}</td>
-                                <td>${factures.pagada ? "Si" : "No"}</td>
+                                <td>${factura.pagada ? "Si" : "No"}</td>
                                 <td>
                                 <img src="IMG/eliminar.png" onclick="eliminarFactura('fila-${factura.id}')" alt="Eliminar">
                                 <img src="IMG/imprimir.png" onclick="imprimirFactura(${factura.id}, ${factura.pagada})" alt="Imprimir">
