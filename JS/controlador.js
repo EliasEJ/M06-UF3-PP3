@@ -104,7 +104,7 @@ function obrirNovaFactura(){
     });
 }
 
-function tancarFactura(){
+function tancarFactura(dialog){
     /*dialog.addEventListener("click", ev => {
         const x = ev.clientX;
         const y = ev.clientY;
@@ -145,6 +145,10 @@ $("#guardarFactura").on("click",function(){
     tancarFactura();
     }
 });
+
+function verificacions(){
+    
+}
 
 function mostrarNumFactura(){
     $("#numFactura").val(_numFactura);
