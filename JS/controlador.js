@@ -4,6 +4,8 @@ let dialog = document.getElementById("novaFactura");
 let dialogEditar = document.getElementById("editarFactura");
 let style = {style: "currency", currency: "EUR"};
 
+let numFactura = $("#numFactura").val() !== "" ? $("#numFactura").val() : 0;
+
 function init() {
     recuperar();
     obrirNovaFactura();
@@ -84,6 +86,7 @@ function editarFactura(idFactura){
     $("#dteFactura").val(datos[7].textContent);
     $("#ivaFactura").val(datos[9].textContent);
     $("#pagadaFactura").val(datos[11].textContent);
+    
 }
 
 function imprimirFactura(idFactura){
@@ -100,11 +103,10 @@ function imprimirFactura(idFactura){
 function obrirNovaFactura(){
     $("#btnNovaFactura").on("click",function(){
         dialog.showModal();
-        verificacions();
     });
 }
 
-function tancarFactura(dialog){
+function tancarFactura(){
     /*dialog.addEventListener("click", ev => {
         const x = ev.clientX;
         const y = ev.clientY;
@@ -115,40 +117,42 @@ function tancarFactura(dialog){
     $("#tancar").on("click",function(){
         dialog.close();
     });
+    $("#tancar2").on("click",function(){
+        dialogEditar.close();
+    });
 }
 
-$("#guardarFactura").on("click",function(){
-    if(verificacions()){
-    //Imprimir factura en la tabla de facturas
-    let fila = `
-    <tr id="fila-${$("#numFactura").val()}">
-        <td>${$("#numFactura").val()}</td>
-        <td>${$("#data").val()}</td>
-        <td>${$("#nif").val()}</td>
-        <td>${$("#nom").val()}</td>
-        <td>${$("#telefon").val()}</td>
-        <td>${$("#email").val()}</td>
-        <td>${""}</td>
-        <td>${$("#dte").val()}</td>
-        <td>${""}</td>
-        <td>${$("#iva").val()}</td>
-        <td>${""}</td>
-        <td>${$("#pagada").is(":checked") ? "Si" : "No"}</td>
-        <td>
-        <img src="IMG/eliminar.png" onclick="eliminarFactura('fila-${$("#numFactura").val()}')" alt="Eliminar">
-        <img src="IMG/imprimir.png" onclick="imprimirFactura(${$("#numFactura").val()})" alt="Imprimir">
-        <img src="IMG/editar.png" onclick="editarFactura(${$("#numFactura").val()})" alt="Editar">
-        <img src="IMG/ver.png" onclick="verArticulos(${$("#numFactura").val()})" alt="Ver">
-        </td>
-    </tr>`;
-    $("#taula").append(fila);
-    tancarFactura();
+$("#guardarFactura").on("click", function(){
+    event.preventDefault();
+    //verificar que los campos esten completos
+    if ($("#numFactura").val() != "" && $("#data").val() != "" && $("#email").val().match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/) && $("#nif").val().match(/[0-9]{8}[A-Za-z]{1}/) && $("#nom").val().match(/[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+/) && $("#telefon").val().match(/[0-9]{9}/) && $("#dte").val().match(/[0-9]{2}/) && $("#iva").val().match(/[0-9]{2}/)) {
+        //Imprimir factura en la tabla de facturas
+        let fila = `
+        <tr id="fila-${$("#numFactura").val()}">
+            <td>${$("#numFactura").val()}</td>
+            <td>${$("#data").val()}</td>
+            <td>${$("#nif").val()}</td>
+            <td>${$("#nom").val()}</td>
+            <td>${$("#telefon").val()}</td>
+            <td>${$("#email").val()}</td>
+            <td>${""}</td>
+            <td>${$("#dte").val()}</td>
+            <td>${""}</td>
+            <td>${$("#iva").val()}</td>
+            <td>${""}</td>
+            <td>${$("#pagada").is(":checked") ? "Si" : "No"}</td>
+            <td>
+            <img src="IMG/eliminar.png" onclick="eliminarFactura('fila-${$("#numFactura").val()}')" alt="Eliminar">
+            <img src="IMG/imprimir.png" onclick="imprimirFactura(${$("#numFactura").val()})" alt="Imprimir">
+            <img src="IMG/editar.png" onclick="editarFactura(${$("#numFactura").val()})" alt="Editar">
+            <img src="IMG/ver.png" onclick="verArticulos(${$("#numFactura").val()})" alt="Ver">
+            </td>
+        </tr>`;
+        $("#taula").append(fila);
+        //Cerrar el dialogo
+        dialog.close();
     }
 });
-
-function verificacions(){
-    
-}
 
 function mostrarNumFactura(){
     $("#numFactura").val(_numFactura);
