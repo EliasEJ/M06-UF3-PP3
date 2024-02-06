@@ -117,6 +117,35 @@
             </div>
         </dialog>
 
+        <dialog id="articlesFactura">
+            <div class="centrat centrarDreta">
+                <img id="tancar2" class="tancar" src="CSS/close.svg">
+                <div>
+                    <h1>Dades de la factura</h1>
+                </div>
+                <br>
+                <table class="border">
+                    <thead>
+                        <tr>
+                            <th>Codi</th>
+                            <th>Article</th>
+                            <th>Unitat</th>
+                            <th>Preu</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="taulaArticles" class="text-center">
+                    </tbody>
+                    <td colspan="4" class="bg-black">Total articles</td>
+                    <td id="subtotalArticles" class="bg-black"></td>
+                </table>
+                <br>
+                <div>
+                    <button type="submit" id="guardarFacturaEditada" class="btn btn-dark center">Guardar</button>
+                </div>
+            </div>
+        </dialog>
+
 
         <br><br>
         <div class="row">
@@ -135,7 +164,7 @@
                             <th>Base I</th>
                             <th>% IVA</th>
                             <th>Total</th>
-                            <th>P ?</th>
+                            <th>Pagada ?</th>
                             <th>Accions</th>
                         </tr>
                     </thead>

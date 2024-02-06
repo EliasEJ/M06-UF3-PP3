@@ -1,23 +1,29 @@
 "use strict";
 
+// Definició de variables per manipular els diàlegs de la interfície i definir l'estil de la moneda.
 let dialog = document.getElementById("novaFactura");
 let dialogEditar = document.getElementById("editarFactura");
+let dialogVer = document.getElementById("articlesFactura");
 let style = {style: "currency", currency: "EUR"};
 let numFactura;
 
+// Funció d'inicialització que s'executarà quan la pàgina es carregui.
 function init() {
     recuperar();
     obrirNovaFactura();
     tancarFactura();
 }
 
+
+// Variables globals per emmagatzemar les dades de les factures.
 let adreca;
 let poblacio;
 let articles = [];
 let dte;
 let iva;
-// let pagada;
 
+
+// Funció per recuperar factures des d'un fitxer JSON.
 function recuperar() {
     $("#taula");
     $("#recuperar").on("click", function () {
@@ -75,6 +81,8 @@ function recuperar() {
     });
 }
 
+
+// Funció per eliminar una fila de la taula de factures.
 function eliminarFactura(idFila){
     console.log(idFila);
     let fila = document.getElementById(idFila);
@@ -82,7 +90,7 @@ function eliminarFactura(idFila){
 
 }
 
-
+// Funció per editar les dades d'una factura existent.
 function editarFactura(idFactura){
     // Buscar la fila de la tabla con el id de la factura
     let fila = document.getElementById('fila-' + idFactura);
@@ -125,6 +133,8 @@ function editarFactura(idFactura){
     
 }
 
+
+// Funció per imprimir la factura.
 function imprimirFactura(idFactura, pagada){
     
     $("#numFacPrint").text(idFactura);
@@ -174,10 +184,30 @@ function imprimirFactura(idFactura, pagada){
 
 }
 
+// Funció per veure els articles d'una factura. Mostra un diàleg amb les dades.
+function verArticulos(idFactura){
+
+    dialogVer.showModal();
+
+    for (let i in articles){
+        let article = articles[i];
+        let fila = `
+        <tr>
+            <td class="border">${article.codi}</td>
+            <td class="border">${article.descripcio}</td>
+            <td class="border">${article.quantitat}</td>
+            <td class="border">${article.preu.toLocaleString("es-ES", {style: 'currency', currency: 'EUR'})}</td>
+            <td class="border">${(article.preu * article.quantitat).toLocaleString("es-ES", {style: 'currency', currency: 'EUR'})}</td>
+        </tr>`;
+        $("#subtotalArticles").text((article.preu * article.quantitat).toLocaleString("es-ES", {style: 'currency', currency: 'EUR'}));
+
+        $("#taulaArticles").append(fila);
+    }
+}
+
+// Funció per obrir un diàleg per a la creació d'una nova factura.
 function obrirNovaFactura(){
     $("#btnNovaFactura").on("click",function(){
-        //Poner todos los campos vacios para que no se guarden los datos
-        //insertar el numero de factura en el campo de la factura nueva mientras tiene en cuenta el ultimo numero de factura en la tabla
         if($("#taula tr:last-child td:first-child").text() == ""){
             numFactura = 1;
         }else {
@@ -196,14 +226,9 @@ function obrirNovaFactura(){
     });
 }
 
+
+// Funció per tancar els diàlegs de factura.
 function tancarFactura(){
-    /*dialog.addEventListener("click", ev => {
-        const x = ev.clientX;
-        const y = ev.clientY;
-        const rect = dialog.getBoundingClientRect();
-    
-        if (x < rect.left || x >= rect.right || y < rect.top || y >= rect.bottom) dialog.close();
-    });*/
     $("#tancar").on("click",function(){
         dialog.close();
     });
@@ -212,6 +237,7 @@ function tancarFactura(){
     });
 }
 
+// Acció per a guardar una nova factura.
 $("#guardarFactura").on("click", function(){
     event.preventDefault();
     //verificar que los campos esten completos
@@ -244,7 +270,7 @@ $("#guardarFactura").on("click", function(){
     }
 });
 
-//funcion para guardar todos las facturas en un archivo .json on el formato factures.json y quitandole los espacios y el formato de moneda
+// Funció per guardar totes les factures en un fitxer JSON.
 $("#guardar").on("click", function(){
     var facturas = [];
     var tabla = document.getElementById('taula');
