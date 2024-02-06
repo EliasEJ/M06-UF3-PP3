@@ -257,6 +257,8 @@ $("#guardar").on("click", function(){
             "nif": celdas[2].innerText,
             "nom_client": celdas[3].innerText,
             "telefon": celdas[4].innerText,
+            "adreca": "",
+            "postal": "",
             "email": celdas[5].innerText,
             "subtotal": parseFloat(celdas[6].innerText),
             "dte": parseFloat(celdas[7].innerText),
