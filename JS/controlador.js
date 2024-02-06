@@ -1,3 +1,7 @@
+//----------------------------------------//
+// Autors: Angel Tarensi i Elyass Jerari  // 
+//----------------------------------------//
+
 "use strict";
 
 // Definició de variables per manipular els diàlegs de la interfície i definir l'estil de la moneda.
