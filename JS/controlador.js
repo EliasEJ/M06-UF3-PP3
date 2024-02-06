@@ -108,7 +108,11 @@ function editarFactura(idFactura){
     $("#emailFactura").val(datos[5].textContent);
     $("#dteFactura").val(datos[7].textContent);
     $("#ivaFactura").val(datos[9].textContent);
-    $("#pagadaFactura").val(datos[11].textContent);
+    if (datos[11].textContent == "Si") {
+        $("#pagadaFactura").prop("checked", true);
+    } else {
+        $("#pagadaFactura").prop("checked", false);
+    }
 
     // Guardar los datos de la factura
     $("#guardarFacturaEditada").on("click", function(){
