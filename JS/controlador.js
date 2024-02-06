@@ -2,6 +2,8 @@
 
 let dialog = document.getElementById("novaFactura");
 let dialogEditar = document.getElementById("editarFactura");
+let style = {style: "currency", currency: "EUR"};
+
 function init() {
     recuperar();
     obrirNovaFactura();
@@ -22,6 +24,7 @@ function recuperar() {
             reader.onload = function(event) {
                 // Parsear el archivo JSON
                 let factures = JSON.parse(event.target.result);
+                //if(factures.pagada == true) ? "Si" : "No";
                 for (let f in factures){
                     for (let i in factures[f]){
                         let factura = factures[f][i];
@@ -33,11 +36,11 @@ function recuperar() {
                                 <td>${factura.nom_client}</td>
                                 <td>${factura.telefon}</td>
                                 <td>${factura.email}</td>
-                                <td>${factura.subtotal}</td>
+                                <td>${factura.subtotal.toLocaleString("es-ES", style)}</td>
                                 <td>${factura.dte}</td>
-                                <td>${factura.baseI}</td>
+                                <td>${factura.baseI.toLocaleString("es-ES", style)}</td>
                                 <td>${factura.iva}</td>
-                                <td>${factura.total}</td>
+                                <td>${factura.total.toLocaleString("es-ES", style)}</td>
                                 <td>${factura.pagada}</td>
                                 <td>
                                 <img src="IMG/eliminar.png" onclick="eliminarFactura('fila-${factura.id}')" alt="Eliminar">
@@ -79,7 +82,7 @@ function editarFactura(idFactura){
     $("#telefonFactura").val(datos[4].textContent);
     $("#emailFactura").val(datos[5].textContent);
     $("#dteFactura").val(datos[7].textContent);
-    $("#ivaFactura").val(datos[8].textContent);
+    $("#ivaFactura").val(datos[9].textContent);
     $("#pagadaFactura").val(datos[11].textContent);
 }
 
@@ -115,7 +118,32 @@ function tancarFactura(){
 }
 
 $("#guardarFactura").on("click",function(){
-
+    if(verificacions()){
+    //Imprimir factura en la tabla de facturas
+    let fila = `
+    <tr id="fila-${$("#numFactura").val()}">
+        <td>${$("#numFactura").val()}</td>
+        <td>${$("#data").val()}</td>
+        <td>${$("#nif").val()}</td>
+        <td>${$("#nom").val()}</td>
+        <td>${$("#telefon").val()}</td>
+        <td>${$("#email").val()}</td>
+        <td>${""}</td>
+        <td>${$("#dte").val()}</td>
+        <td>${""}</td>
+        <td>${$("#iva").val()}</td>
+        <td>${""}</td>
+        <td>${$("#pagada").is(":checked") ? "Si" : "No"}</td>
+        <td>
+        <img src="IMG/eliminar.png" onclick="eliminarFactura('fila-${$("#numFactura").val()}')" alt="Eliminar">
+        <img src="IMG/imprimir.png" onclick="imprimirFactura(${$("#numFactura").val()})" alt="Imprimir">
+        <img src="IMG/editar.png" onclick="editarFactura(${$("#numFactura").val()})" alt="Editar">
+        <img src="IMG/ver.png" onclick="verArticulos(${$("#numFactura").val()})" alt="Ver">
+        </td>
+    </tr>`;
+    $("#taula").append(fila);
+    tancarFactura();
+    }
 });
 
 function mostrarNumFactura(){
