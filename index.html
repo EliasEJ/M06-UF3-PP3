@@ -176,17 +176,38 @@
         <table class="table table-striped"> 
             <thead>
                 <tr>
-                    <th>Codi</th>
-                    <th>Article</th>
-                    <th>Unitat</th>
-                    <th>Preu</th>
-                    <th>Subtotal</th>
+                    <th class="border">Codi</th>
+                    <th class="border">Article</th>
+                    <th class="border">Unitat</th>
+                    <th class="border">Preu</th>
+                    <th class="border">Subtotal</th>
                 </tr>
             </thead>
             <tbody id="taulaPrint">
             </tbody>
+            <td colspan="4" class="text-center border">Total articles</td>
+            <td id="subtotalPrint" class="border"></td>
         </table>
+        <br>
+            <div class="row">
+                <div class="col-2 border">Dte</div>
+                <div class="col-1 border" id="dtePrint"></div>
+                <div class="col-2 border">Import dte.</div>
+                <div class="col-1 border" id="importDtePrint">€</div>
+                <div class="col-3 border">Base Imposable</div>
+                <div class="col-3 border" id="baseImposablePrint">€</div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-2 border">IVA</div>
+                <div class="col-1 border" id="ivaPrint">%</div>
+                <div class="col-2 border">Import IVA</div>
+                <div class="col-1 border" id="importIvaPrint">€</div>
+                <div class="col-3 border">TOTAL FACTURA</div>
+                <div class="col-3 border" id="totalFacturaPrint">€</div>
+            </div>
     </div>
+    <div id="marcaAgua" style="display: none;">PAGADA</div>
 
 </body>
 

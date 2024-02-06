@@ -10,6 +10,13 @@ function init() {
     tancarFactura();
 }
 
+let adreca;
+let poblacio;
+let articles = [];
+let dte;
+let iva;
+// let pagada;
+
 function recuperar() {
     $("#taula");
     $("#recuperar").on("click", function () {
@@ -28,6 +35,15 @@ function recuperar() {
                 for (let f in factures){
                     for (let i in factures[f]){
                         let factura = factures[f][i];
+
+                        adreca = factura.adreca;
+                        poblacio = factura.poblacio;
+                        articles = factura.articles;
+                        dte = factura.dte;
+                        iva = factura.iva;
+                        // pagada = factura.pagada;
+                        
+
                         let fila = `
                             <tr id="fila-${factura.id}">
                                 <td>${factura.id}</td>
@@ -44,7 +60,7 @@ function recuperar() {
                                 <td>${factura.pagada}</td>
                                 <td>
                                 <img src="IMG/eliminar.png" onclick="eliminarFactura('fila-${factura.id}')" alt="Eliminar">
-                                <img src="IMG/imprimir.png" onclick="imprimirFactura(${factura.id})" alt="Imprimir">
+                                <img src="IMG/imprimir.png" onclick="imprimirFactura(${factura.id}, ${factura.pagada})" alt="Imprimir">
                                 <img src="IMG/editar.png" onclick="editarFactura(${factura.id})" alt="Editar">
                                 <img src="IMG/ver.png" onclick="verArticulos(${factura.id})" alt="Ver">
                                 </td>
@@ -52,7 +68,6 @@ function recuperar() {
                         $("#taula").append(fila);
                     }
                 }
-                
             };
             reader.readAsText(file);
         }
@@ -66,6 +81,7 @@ function eliminarFactura(idFila){
     fila.remove();
 
 }
+
 
 function editarFactura(idFactura){
     // Buscar la fila de la tabla con el id de la factura
@@ -86,15 +102,53 @@ function editarFactura(idFactura){
     $("#pagadaFactura").val(datos[11].textContent);
 }
 
-function imprimirFactura(idFactura){
+function imprimirFactura(idFactura, pagada){
+    
     $("#numFacPrint").text(idFactura);
     $("#dataPrint").text($("#fila-" + idFactura + " td:nth-child(2)").text());
     $("#nifFacPrint").text($("#fila-" + idFactura + " td:nth-child(3)").text());
     $("#nomFacPrint").text($("#fila-" + idFactura + " td:nth-child(4)").text());
-    // TODO: Falta la dirección
-    // $("#adrecaFacPrint").text($("#fila-" + idFactura + " td:nth-child(5)").text());
+    $("#adrecaFacPrint").text(adreca);
+    $("#poblacioFacPrint").text(poblacio);
 
-    window.print();
+    let total = 0;
+
+    for (let i in articles){
+        let article = articles[i];
+        let subtotal = article.preu * article.quantitat;
+        let fila = `
+        <tr>
+            <td class="border">${article.codi}</td>
+            <td class="border">${article.descripcio}</td>
+            <td class="border">${article.quantitat}</td>
+            <td class="border">${article.preu.toLocaleString("es-ES", {style: 'currency', currency: 'EUR'})}</td>
+            <td class="border">${subtotal.toLocaleString("es-ES", {style: 'currency', currency: 'EUR'})}</td>
+        </tr>`;
+        $("#taulaPrint").append(fila);
+
+        total += subtotal;
+    }
+    $("#subtotalPrint").text(total.toLocaleString("es-ES", {style: 'currency', currency: 'EUR'}));
+
+    $("#dtePrint").text(dte + "%");
+    $("#importDtePrint").text((total * dte / 100).toLocaleString("es-ES", {style: 'currency', currency: 'EUR'}));
+    $("#baseImposablePrint").text((total - (total * dte / 100)).toLocaleString("es-ES", {style: 'currency', currency: 'EUR'}));
+    $("#ivaPrint").text(iva + "%");
+    $("#importIvaPrint").text(((total - (total * dte / 100)) * iva / 100).toLocaleString("es-ES", {style: 'currency', currency: 'EUR'}));
+    $("#totalFacturaPrint").text((total - (total * dte / 100) + ((total - (total * dte / 100)) * iva / 100)).toLocaleString("es-ES", {style: 'currency', currency: 'EUR'}));
+    
+    if (pagada === true) {
+        $("#marcaAgua").show();
+        window.print();
+
+    } else {
+        $("#marcaAgua").hide();
+        window.print();
+
+    }
+
+    $("#marcaAgua").hide();
+
 }
 
 function obrirNovaFactura(){
