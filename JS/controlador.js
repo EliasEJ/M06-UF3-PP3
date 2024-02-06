@@ -9,14 +9,6 @@ function init() {
     recuperar();
     obrirNovaFactura();
     tancarFactura();
-    //insertar el numero de factura en el campo de la factura nueva mientras tiene en cuenta el ultimo numero de factura en la tabla
-
-    if($("#taula tr:last-child td:first-child").text() == ""){
-        numFactura = 1;
-    }else {
-        numFactura = parseInt($("#taula tr:last-child td:first-child").text()) + 1;
-    }
-    $("#numFactura").val(numFactura);
 }
 
 let adreca;
@@ -50,12 +42,11 @@ function recuperar() {
                         articles = factura.articles;
                         dte = factura.dte;
                         iva = factura.iva;
-                        // pagada = factura.pagada;
                         
 
                         let fila = `
                             <tr id="fila-${factura.id}">
-                                <td id="numFacturaTaula_${factura.id}">${factura.id}</td>
+                                <td>${factura.id}</td>
                                 <td>${factura.data}</td>
                                 <td>${factura.nif}</td>
                                 <td>${factura.nom_client}</td>
@@ -185,6 +176,22 @@ function imprimirFactura(idFactura, pagada){
 
 function obrirNovaFactura(){
     $("#btnNovaFactura").on("click",function(){
+        //Poner todos los campos vacios para que no se guarden los datos
+        //insertar el numero de factura en el campo de la factura nueva mientras tiene en cuenta el ultimo numero de factura en la tabla
+        if($("#taula tr:last-child td:first-child").text() == ""){
+            numFactura = 1;
+        }else {
+            numFactura = parseInt($("#taula tr:last-child td:first-child").text()) + 1;
+        }
+        $("#numFactura").val(numFactura);
+        $("#data").val("");
+        $("#nif").val("");
+        $("#nom").val("");
+        $("#telefon").val("");
+        $("#email").val("");
+        $("#dte").val("");
+        $("#iva").val("");
+        $("#pagada").val("");
         dialog.showModal();
     });
 }
@@ -212,7 +219,7 @@ $("#guardarFactura").on("click", function(){
         //Imprimir factura en la tabla de facturas
         let fila = `
         <tr id="fila-${$("#numFactura").val(numFactura)}">
-            <td id="numFacturaTaula_${$("#numFactura").val()}">${$("#numFactura").val()}</td>
+            <td>${$("#numFactura").val()}</td>
             <td>${$("#data").val()}</td>
             <td>${$("#nif").val()}</td>
             <td>${$("#nom").val()}</td>
@@ -254,6 +261,8 @@ $("#guardar").on("click", function(){
             "nif": celdas[2].innerText,
             "nom_client": celdas[3].innerText,
             "telefon": celdas[4].innerText,
+            "adreca": "",
+            "postal": "",
             "email": celdas[5].innerText,
             "subtotal": parseFloat(celdas[6].innerText),
             "dte": parseFloat(celdas[7].innerText),
